@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoQuery System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARrapqbLIzdIpce8dIgVaNkQk4UUlfPwY&callback=initMap"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">GeoQuery</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="feature.html" class="active">Features</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Discover the World Around You with Natural Language Queries!</h1>
+        <p>Ask questions like a local. Find places, insights, and more with just your words.</p>
+        <a href="chatbot.js" class="cta-button">Try It Now</a>
+    </section>
+
+    <section class="features">
+        <h2>Features</h2>
+        <div class="feature" onclick="location.href='nl.js'">
+            <div class="icon">🗣️</div>
+            <h3>Natural Language Query Input</h3>
+            <p>Ask anything—just type or speak your query!</p>
+        </div>
+        <div class="feature" onclick="location.href='ai_chatbot.html'">
+            <div class="icon">🤖</div>
+            <h3>AI Chatbot Assistance</h3>
+            <p>Get instant answers and guidance from our AI chatbot.</p>
+        </div>
+        <div class="feature" onclick="location.href='event_discovery.html'">
+            <div class="icon">🔍</div>
+            <h3>Event Discovery</h3>
+            <p>Find local events tailored to your interests.</p>
+        </div>
+        <div class="feature" onclick="location.href='public_transport.html'">
+            <div class="icon">🚌</div>
+            <h3>Public Transport Data</h3>
+            <p>Access nearby transport options for easier navigation.</p>
+        </div>
+        <div class="feature" onclick="location.href='multi_language.html'">
+            <div class="icon">🌍</div>
+            <h3>Multi-language Support</h3>
+            <p>Interact in your preferred language for better accessibility.</p>
+        </div>
+    </section>
+
+    <section class="interactive-map">
+        <h2>Geographical Map</h2>
+        <div id="map" class="map-placeholder"></div>
+    </section>
+
+    <section class="testimonials">
+        <h2>What Our Users Say</h2>
+        <blockquote>"This system changed how I explore my city!" - Alex</blockquote>
+        <blockquote>"Finding places has never been easier!" - Jamie</blockquote>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="quick-links">
+                <a href="about.html">About</a>
+                <a href="pricing.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+            </div>
+            <div class="social-media">
+                <a href="twitter.html">Twitter</a>
+                <a href="facebook.html">Facebook</a>
+                <a href="linkedin.html">LinkedIn</a>
+            </div>
+            <div class="contact">
+                <p>Contact us: support@geoquery.com</p>
+            </div>
+        </div>
+    </footer>
+    
+
+    <div class="chat-icon" id="chat-icon">🤖</div>
+
+    <div class="chatbot" id="chatbot">
+        <h2>Need Help? Chat with Us!</h2>
+        <div class="chatbox">
+            <div class="chat-log" id="chat-log"></div>
+            <input type="text" id="user-input" placeholder="Type your message..." />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script src="chatbot.js"></script>
+    <script>
+        let map;
+
+        function initMap() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        center: userLocation,
+                        zoom: 15
+                    });
+                    new google.maps.Marker({ position: userLocation, map: map });
+                }, () => {
+                    handleLocationError(true);
+                });
+            } else {
+                handleLocationError(false);
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation) {
+            alert(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+        }
+
+        $(document).ready(function() {
+            const chatLog = $("#chat-log");
+
+            $("#send-button").click(function() {
+                const userInput = $("#user-input").val();
+                if (userInput) {
+                    chatLog.append(`<div>User: ${userInput}</div>`);
+                    $("#user-input").val('');
+                    getChatbotResponse(userInput);
+                }
+            });
+
+            $("#search-button").click(function() {
+                const location = $("#location-input").val();
+                const geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode({ address: location }, (results, status) => {
+                    if (status === "OK") {
+                        map.setCenter(results[0].geometry.location);
+                        new google.maps.Marker({ position: results[0].geometry.location, map: map });
+                    } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                    }
+                });
+            });
+
+            function getChatbotResponse(input) {
+                let response = "I'm here to help! Please ask your question about geoqueries.";
+                if (input.toLowerCase().includes("park")) {
+                    response = "You can find parks in your area by typing 'Find parks near me'.";
+                } else if (input.toLowerCase().includes("event")) {
+                    response = "You can check local events by saying 'Show me events this weekend'.";
+                }
+                chatLog.append(`<div>Chatbot: ${response}</div>`);
+                chatLog.scrollTop(chatLog[0].scrollHeight);
+            }
+
+            $("#chat-icon").click(function() {
+                $("#chatbot").toggle();
+            });
+        });
+    </script>
+</body>
+</html>

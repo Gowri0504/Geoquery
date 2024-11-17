@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background: url("sbg.jpg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for the header */
+    padding: 1em 0; /* Vertical padding for the header */
+    text-align: center; /* Center the nav items */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #FFC107; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.auth-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    flex-direction: column; /* Stack header above the form */
+}
+
+.form-container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 400px;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+input::placeholder {
+    color: #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FFC107;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ffb300;
+}
+
+p {
+    margin-top: 15px;
+}
+
+p a {
+    color: #FFC107;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+.success-message {
+    margin-top: 15px;
+    color: #FFC107; /* Yellow color */
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .form-container {
+        width: 90%; /* Full width on smaller screens */
+        padding: 20px;
+    }
+
+    nav ul li {
+        display: block; /* Stack nav items vertically */
+        margin-bottom: 10px;
+    }
+}

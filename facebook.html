@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follow Us on Facebook - GeoQuery</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        header {
+            background-color: #1877f2;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        .facebook-section {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0;
+        }
+
+        .facebook-widget {
+            width: 80%;
+        }
+
+        .follow-us {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .follow-us h2 {
+            font-size: 2em;
+            color: #1877f2;
+        }
+
+        .follow-us p {
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .facebook-feed {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Follow GeoQuery on Facebook!</h1>
+</header>
+
+<div class="follow-us">
+    <h2>Join Our Facebook Community</h2>
+    <p>Stay updated with the latest news, tips, and insights from GeoQuery. Like our page and be part of our growing community!</p>
+</div>
+
+<section class="facebook-section">
+    <div class="facebook-widget">
+        <!-- Embedded Facebook Page -->
+        <div class="fb-page" 
+            data-href="https://www.facebook.com/GeoQuery" 
+            data-tabs="timeline" 
+            data-width="600" 
+            data-height="400" 
+            data-small-header="false" 
+            data-adapt-container-width="true" 
+            data-hide-cover="false" 
+            data-show-facepile="true">
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 GeoQuery. All rights reserved.</p>
+    <p>Contact us: <a href="mailto:support@geoquery.com">support@geoquery.com</a></p>
+</footer>
+
+<!-- Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0" nonce="abcdefg"></script>
+
+</body>
+</html>
